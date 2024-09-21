@@ -1,23 +1,5 @@
 package pacote;
 
-// deixa pra depois
-// !!FUTURO!!
-// enum Cargo{
-//     GERENTE(1),
-//     SubGerente(2),
-//     Faxineiro(3)
-
-//     private int num;
-
-//     Cargo(int cargo) {
-//         this.num = cargo;
-//     }
-
-//     public int getNome() {
-//         return num;
-//     }
-// } 
-
 public class Funcionario {
 
     private String Name;   
