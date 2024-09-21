@@ -39,7 +39,9 @@ public class Principal {
                     System.out.printf("digite nome do funcionario:\n");
                     funcionario.setName(sc.nextLine());
 
-                    funcionario.adicionarFuncionario();
+                    System.out.printf("digite o cargo [Gerente,SubGerente,Faxineiro]:\n");
+                    String testCargo = sc.nextLine();
+
                 }
                 case 2 -> { //Alterar
                     funcionario.alterarFuncionario();

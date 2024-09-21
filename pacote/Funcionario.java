@@ -1,9 +1,19 @@
 package pacote;
 
 enum Cargo{
-    Gerente,
-    SubGerente,
-    Faxineiro
+    Gerente(1),
+    SubGerente(2),
+    Faxineiro(3)
+
+    private int num;
+
+    DiaDaSemana(int cargo) {
+        this.num = cargo;
+    }
+
+    public int getNome() {
+        return num;
+    }
 } 
 public class Funcionario {
     private String Name;   
