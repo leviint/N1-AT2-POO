@@ -24,12 +24,16 @@ public class Projeto {
 
     //métodos
     public void adicionarFuncionario(Funcionario funcionario){
-        System.out.println("");
+        System.out.println("\nOpção Selecionada: [1] - Adicionar Funcionário\n");
         funcionarios.add(funcionario);
     }
 
+    public void alterarFuncionario(Funcionario funcionario){
+        
+    }
+
     public void removerFuncionario(Funcionario funcionario){
-        System.out.println("Opção Selecionada: ");
+        System.out.println("\nOpção Selecionada: [2] - Remover Funcionário\n");
         funcionarios.remove(funcionario);
     }
 

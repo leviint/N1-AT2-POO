@@ -44,4 +44,7 @@ public class Funcionario {
     public void setName(String nomeNovo){
         this.Name = nomeNovo;
     }
+    public void removeFuncinario(Funcionario fun){
+
+    }
 }
