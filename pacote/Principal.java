@@ -5,11 +5,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-/*
--input diferente de numero no menu crasha o programa
--Digitar salário do funcionário como string buga
--Corrigir "escolha o projeto" se nenhum projeto está cadastrado aparecer o campo de input para o usuário
-*/
 
 public class Principal {
     Scanner sc = new Scanner(System.in);
@@ -18,10 +13,45 @@ public class Principal {
     public static void main(String[] args) {
         Principal pr = new Principal();
         boolean entradaValida = false;
+        boolean projetoRodando = true;
+
+        while (projetoRodando || !entradaValida) {
+            try {                
+                System.out.printf("\t\t_____TaskFlow_____\n\t\tGerenciador de Projeto:\n[1] - Gerenciar Projeto\n[2] - Gerenciar Funcionários de um Projeto\n[3] - Sair\n");
+                int choice = pr.sc.nextInt();
+                pr.sc.nextLine(); 
+
+
+                switch (choice) {
+                    case 1 -> { 
+                        pr.GerenciarProjeto();
+                        entradaValida = true;
+                    } 
+                    case 2 -> {                                                                                                         
+                        pr.GerenciarFuncionariosProjeto();
+                        entradaValida=true;
+                    }           
+                    case 3 -> {             
+                        projetoRodando = false;
+                        entradaValida = true;                                                       
+                        break;
+                    }           
+
+                }            
+            } catch (Exception e) {
+                System.out.println("Entrada do input está inválida.");
+            }
+        }
+    }    
+
+    public void menuPrincipal() {
+        Principal pr = new Principal();
+        boolean entradaValida = false;
+        boolean projetoRodando = true;
 
         while (true || !entradaValida) {
             try {                
-                System.out.printf("\t\t_____TaskFlow_____\n\t\tGerenciador de Projeto:\n[1] - Gerenciar Projeto\n[2] - Gerenciar Funcionários de um Projeto\n");
+                System.out.printf("\t\t_____TaskFlow_____\n\t\tGerenciador de Projeto:\n[1] - Gerenciar Projeto\n[2] - Gerenciar Funcionários de um Projeto\n[3] - Sair\n");
                 int choice = pr.sc.nextInt();
                 pr.sc.nextLine(); 
 
@@ -35,7 +65,11 @@ public class Principal {
                                                                                                
                         pr.GerenciarFuncionariosProjeto();
                         entradaValida=true;
-                    }                
+                    }           
+                    case 3 -> {             
+                        System.exit(0);                        
+                    }           
+
                 }            
             } catch (Exception e) {
                 System.out.println("Entrada do input está inválida.");
@@ -109,12 +143,19 @@ public class Principal {
     }
 
     public void GerenciarFuncionariosProjeto() {
+        if(this.projetos.isEmpty()) {
+            System.out.println("Você primeiro precisa criar um projeto!");
+            return;
+        }
+
+
         listarProjetos();
         System.out.println("Escolha o projeto para gerenciar os funcionários:");
         int indexProjeto = sc.nextInt() - 1;
         sc.nextLine(); 
 
         boolean indexProjetoentradaValida = false;
+
 
 
         while(!indexProjetoentradaValida) {
@@ -158,7 +199,11 @@ public class Principal {
                                 case 4 -> {
                                     projeto.listarFuncionarios();
                                     entradaValidaOpcaoFuncionario = true;
-                                }                            
+                                } 
+                                case 5 -> {
+                                    menuPrincipal();
+                                    break;
+                                }                           
                             }
                         } catch (InputMismatchException e) {
                             System.out.println("Digite um número válido!");
