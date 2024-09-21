@@ -1,5 +1,7 @@
 package pacote;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -35,42 +37,67 @@ public class Principal {
                     System.out.printf("\nDigite um numero valido!");
                     break;
                 }
-            
-
         }
 
     }
     
     public void GerenciarFuncionario(){
-        Funcionario funcionario = new Funcionario();
+        List<Funcionario> funcionarios = new ArrayList<>();
         while(true){
             System.out.printf("\t\t_____TaskFlow_____\nFuncionario:\n[1] - Criar\n[2] - alterar\n[3] - deletar\n");
             int choice = sc.nextInt();
 
             switch (choice) {
                 case 1 -> { //Criar
+                    Funcionario fun = new Funcionario();
                     System.out.printf("digite nome do funcionario:\n");
-                    funcionario.setName(sc.nextLine());
+                    fun.setName(sc.nextLine());
 
                     while(true){
                         System.out.printf("digite o cargo [Gerente = 1,SubGerente = 2,Faxineiro = 3]:\n");
                         String testCargo = sc.nextLine();
 
                         if(testCargo.equals("Gerente") || testCargo.equals("SubGerente") || testCargo.equals("Faxineiro")){
-                            funcionario.setCargo(testCargo);
+                            fun.setCargo(testCargo);
                             break;
                         }
                         System.out.printf("Digitou errado \n");
                     }
 
                     System.out.printf("digite o salario do funcionario:\n");
-                    double testSalario = sc.nextDouble();
-                    funcionario.setSalario(testSalario);
+                    fun.setSalario(sc.nextDouble());
 
+                    funcionarios.add(fun);
+                    break;
                 }
-                case 2 -> { 
-                    System.out.printf("\t\t_____TaskFlow_____\nFuncionario:\n[1] - Criar\n[2] - alterar\n[3] - deletar\n");
-                    int choice = sc.nextInt();
+                case 2 -> { // alterar
+                    // mostrar os funcionarios
+                    System.out.printf("escolhar qual funcionario");
+                    int choiceChange = sc.nextInt();
+
+                    Funcionario fun = funcionarios.get(choiceChange);
+
+                    System.out.printf("\t\t_____TaskFlow_____\nFuncionario:\n[1] - Trocar nome\n[2] - trocar cargo\n[3] - trocar salario\n");
+                    choiceChange = sc.nextInt();
+
+                    switch (choiceChange) {
+                        case 1 ->{
+                            System.out.printf("digite o novo nome do funcionario");
+                            String novoNome = sc.nextLine();
+                            fun.setName(novoNome);
+                        }
+                        case 2 ->{
+                            System.out.printf("digite o novo cargo do funcionario");
+                            String novoCargo = sc.nextLine();
+                            fun.setCargo(novoCargo);
+                        }
+                        case 3 ->{
+                            System.out.printf("digite o novo salario do funcionario");
+                            double novoSalario = sc.nextDouble();
+                            fun.setSalario(novoSalario);
+                        }
+                        default -> System.out.printf("Digite entre o escodas opcoes [1, 2, 3]");
+                    }
                 }
                 case 3 -> { //Deletar
                 }

@@ -9,7 +9,8 @@ public class Projeto {
     //atributos
     String nome;
     LocalDate dataAtual;
-    LocalDate prazo = LocalDate.now().plusDays(5);
+    int qntDiasPrazo;
+    LocalDate prazo = LocalDate.now().plusDays(qntDiasPrazo);
     Funcionario funcionarioResponsavel;
     List<Funcionario> funcionarios;
 

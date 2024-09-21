@@ -20,7 +20,6 @@ package pacote;
 
 public class Funcionario {
 
-  
     private String Name;   
     private String cargo;
     private double Salario;
