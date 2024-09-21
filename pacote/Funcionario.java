@@ -1,23 +1,28 @@
 package pacote;
 
-enum Cargo{
-    Gerente(1),
-    SubGerente(2),
-    Faxineiro(3)
+// deixa pra depois
+// !!FUTURO!!
+// enum Cargo{
+//     GERENTE(1),
+//     SubGerente(2),
+//     Faxineiro(3)
 
-    private int num;
+//     private int num;
 
-    DiaDaSemana(int cargo) {
-        this.num = cargo;
-    }
+//     Cargo(int cargo) {
+//         this.num = cargo;
+//     }
 
-    public int getNome() {
-        return num;
-    }
-} 
+//     public int getNome() {
+//         return num;
+//     }
+// } 
+
 public class Funcionario {
+
+  
     private String Name;   
-    private Cargo cargo;
+    private String cargo;
     private double Salario;
 
     Funcionario(){
@@ -26,11 +31,12 @@ public class Funcionario {
         this.Salario = 0;
     }
 
-    Funcionario(String nome, Cargo cargo, double salario){
+    Funcionario(String nome, String cargo, double salario){
         this.Name = nome;
         this.cargo = cargo;
         this.Salario = salario;
     }
+    
 
     public void setSalario(double salarioNovo){
         this.Salario = salarioNovo;
@@ -40,11 +46,11 @@ public class Funcionario {
         return Salario;
     }
 
-    public void setCargo(Cargo cargoNovo){
+    public void setCargo(String cargoNovo){
         this.cargo = cargoNovo;
     }
 
-    public Cargo getCargo(){
+    public String getCargo(){
         return cargo;
     }
 
@@ -53,8 +59,5 @@ public class Funcionario {
     }
     public void setName(String nomeNovo){
         this.Name = nomeNovo;
-    }
-    public void removeFuncinario(Funcionario fun){
-
     }
 }

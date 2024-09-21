@@ -8,8 +8,8 @@ public class Projeto {
     
     //atributos
     String nome;
-    LocalDate dataAtual = LocalDate.now();
-    LocalDate prazo;
+    LocalDate dataAtual;
+    LocalDate prazo = LocalDate.now().plusDays(5);
     Funcionario funcionarioResponsavel;
     List<Funcionario> funcionarios;
 
@@ -20,6 +20,11 @@ public class Projeto {
         this.prazo = prazo;
         this.funcionarioResponsavel = new Funcionario();
         this.funcionarios = new ArrayList<>();
+    }
+
+    public Projeto(String nome, LocalDate prazo){
+        this.nome = nome;
+        this.prazo = prazo;
     }
 
     //métodos
@@ -35,6 +40,18 @@ public class Projeto {
     public void removerFuncionario(Funcionario funcionario){
         System.out.println("\nOpção Selecionada: [2] - Remover Funcionário\n");
         funcionarios.remove(funcionario);
+    }
+
+    public void checarPrazo(){
+        dataAtual = LocalDate.now();
+
+        if(dataAtual.isBefore(prazo)){
+            System.out.println("O projeto ainda está dentro do prazo.");
+        }else if (dataAtual.isEqual(prazo)){
+            System.out.println("Hoje é o último dia do prazo.");
+        }else{
+            System.out.println("O prazo do projeto expirou.");
+        }
     }
 
 }
