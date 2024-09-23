@@ -115,7 +115,7 @@ public class Projeto {
             try {
                 System.out.printf("Escolha o que deseja editar para o funcionário %s:\n[1] - Nome\n[2] - Cargo\n[3] - Salário\n", funcionarioParaEditar.getName());
                 int opcao = sc.nextInt();
-                sc.nextLine(); // Limpa o buffer
+                sc.nextLine();
 
                 switch (opcao) {
                     case 1 -> {
@@ -145,7 +145,7 @@ public class Projeto {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Opção inválida. Por favor, insira um número inteiro.");
-                sc.nextLine(); // Limpa o buffer para evitar loops infinitos
+                sc.nextLine();
             }
         }
     } else {
