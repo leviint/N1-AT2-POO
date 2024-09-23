@@ -7,11 +7,11 @@ import java.util.Scanner;
 
 public class Principal {
     Scanner sc = new Scanner(System.in);
-    List<Projeto> projetos = new ArrayList<>(); // Lista de projetos é mantida na mesma instância.
+    List<Projeto> projetos = new ArrayList<>();
 
     public static void main(String[] args) {
         Principal pr = new Principal();
-        pr.menuPrincipal(); // Chamando o menu principal diretamente sem criar outra instância.
+        pr.menuPrincipal();
     }
 
     public void menuPrincipal() {
@@ -42,7 +42,7 @@ public class Principal {
     public void GerenciarProjeto() {
         System.out.printf("\t\t_____TaskFlow_____\nProjeto:\n[1] - Criar Projeto\n[2] - Remover Projeto\n[3] - Verificar Prazo\n");
         int choice = sc.nextInt();
-        sc.nextLine(); // Limpa o buffer
+        sc.nextLine();
 
         switch (choice) {
             case 1 -> criarProjeto();
@@ -116,14 +116,14 @@ public class Principal {
             while (gerenciandoFuncionarios) {
                 System.out.printf("\t\t_____TaskFlow_____\nFuncionários do Projeto %s:\n[1] - Adicionar Funcionário\n[2] - Remover Funcionário\n[3] - Editar Funcionário\n[4] - Listar Funcionários\n[5] - Voltar\n", projeto.getNome());
                 int choice = sc.nextInt();
-                sc.nextLine(); // Limpa o buffer
+                sc.nextLine();
 
                 switch (choice) {
                     case 1 -> adicionarFuncionario(projeto);
                     case 2 -> removerFuncionario(projeto);
                     case 3 -> editarFuncionario(projeto);
                     case 4 -> projeto.listarFuncionarios();
-                    case 5 -> gerenciandoFuncionarios = false; // Volta ao menu anterior
+                    case 5 -> gerenciandoFuncionarios = false;
                     default -> System.out.println("Opção inválida.");
                 }
             }
