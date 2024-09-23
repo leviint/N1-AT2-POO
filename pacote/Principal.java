@@ -21,36 +21,102 @@ public class Principal {
             try {                
                 System.out.printf("\t\t_____TaskFlow_____\n\t\tGerenciador de Projeto:\n[1] - Gerenciar Projeto\n[2] - Gerenciar Funcionários de um Projeto\n[3] - Sair\n");
                 int choice = sc.nextInt();
-                sc.nextLine(); // Limpa o buffer
+                sc.nextLine();
 
                 switch (choice) {
                     case 1 -> GerenciarProjeto();
                     case 2 -> GerenciarFuncionariosProjeto();
                     case 3 -> {
                         System.out.println("Encerrando o sistema.");
-                        projetoRodando = false; // Sair do loop e encerrar o programa
+                        projetoRodando = false;
                     }
                     default -> System.out.println("Opção inválida. Tente novamente.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada inválida. Digite um número.");
-                sc.nextLine(); // Limpa o buffer
+                sc.nextLine();
             }
         }
     }
 
     public void GerenciarProjeto() {
         System.out.printf("\t\t_____TaskFlow_____\nProjeto:\n[1] - Criar Projeto\n[2] - Remover Projeto\n[3] - Verificar Prazo\n");
+        
         int choice = sc.nextInt();
-        sc.nextLine();
-
-        switch (choice) {
-            case 1 -> criarProjeto();
-            case 2 -> removerProjeto();
-            case 3 -> verificarPrazo();
-            default -> System.out.println("Opção inválida.");
+        sc.nextLine(); 
+        boolean entradaValida = false;
+    
+        while (!entradaValida) {
+            try {
+                switch (choice) {
+                    case 1 -> {
+                        System.out.println("Digite o nome do projeto:");
+                        String nomeProjeto = sc.nextLine();
+                        System.out.println("Digite o prazo de entrega do projeto (formato dd/MM/yyyy):");
+                        String prazoEntrega = sc.nextLine();
+    
+                        Projeto projeto = new Projeto(nomeProjeto, prazoEntrega);
+    
+                        boolean prazoValido = projeto.prazoEntregaValido(prazoEntrega);
+    
+                        if (prazoValido) {
+                            projetos.add(projeto);
+                            System.out.println("Projeto " + nomeProjeto + " criado com sucesso.");
+                        } else {
+                            System.out.println("Projeto " + nomeProjeto + " não pode ser criado.");
+                        }
+                        entradaValida = true;
+                    }
+                    case 2 -> {
+                        if (projetos.isEmpty()) {
+                            System.out.println("Nenhum projeto cadastrado para remover.");
+                        } else {
+                            listarProjetos();
+                            System.out.println("Digite o número do projeto a ser removido:");
+                            int index = sc.nextInt() - 1;
+                            if (index >= 0 && index < projetos.size()) {
+                                Projeto removido = projetos.remove(index);
+                                System.out.println("Projeto " + removido.getNome() + " removido.");
+                            } else {
+                                System.out.println("Índice inválido.");
+                            }
+                        }
+                        entradaValida = true;
+                    }
+                    case 3 -> {
+                        if (projetos.isEmpty()) {
+                            System.out.println("Nenhum projeto cadastrado para verificar o prazo.");
+                        } else {
+                            listarProjetos();
+                            System.out.println("Digite o número do projeto para verificar o prazo:");
+                            int index = sc.nextInt() - 1;
+    
+                            if (index >= 0 && index < projetos.size()) {
+                                Projeto projeto = projetos.get(index);
+                                projeto.exibirPrazo();
+                                if (projeto.estaDentroDoPrazo()) {
+                                    System.out.println("O projeto está dentro do prazo.");
+                                } else {
+                                    System.out.println("O prazo do projeto já foi ultrapassado.");
+                                }
+                            } else {
+                                System.out.println("Índice inválido.");
+                            }
+                        }
+                        entradaValida = true;
+                    }
+                    default -> {
+                        System.out.println("Opção inválida. Por favor, escolha uma opção entre 1 e 3.");
+                    }
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Digite um número válido!");
+                sc.nextLine();
+            }
         }
     }
+    
+    
 
     public void criarProjeto() {
         System.out.println("Digite o nome do projeto:");
@@ -107,7 +173,7 @@ public class Principal {
         listarProjetos();
         System.out.println("Escolha o projeto para gerenciar os funcionários:");
         int indexProjeto = sc.nextInt() - 1;
-        sc.nextLine(); // Limpa o buffer
+        sc.nextLine();
 
         if (indexProjeto >= 0 && indexProjeto < projetos.size()) {
             Projeto projeto = projetos.get(indexProjeto);
